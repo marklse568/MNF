@@ -1,17 +1,19 @@
 package de.szut.lf8_project.employee;
 
-import java.util.UUID;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "Employee")
+@Table(name = "Employees")
 public class EmployeeEntity {
 
     private String qualification;
