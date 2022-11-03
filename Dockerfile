@@ -10,4 +10,4 @@ ENV WEB_IP "$WEB_ADDRESS_INT"
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "/lf8_project.jar"]
+ENTRYPOINT ["java", "-jar", "/lf8_project.jar"] 
