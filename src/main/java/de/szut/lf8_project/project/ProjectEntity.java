@@ -14,7 +14,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "project")
-public class projectEntity {
+public class ProjectEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +22,8 @@ public class projectEntity {
     
     private long chargePersonId;
     private long customerId;
-    private String PersonInCharge;
-    private String ProjectDescription;
+    private String personInCharge;
+    private String projectDescription;
     private String comment;
     private Date startDate;
     private Date plannedEndDate;

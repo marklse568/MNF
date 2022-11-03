@@ -1,25 +1,24 @@
 package de.szut.lf8_project.project;
 
-import de.szut.lf8_project.hello.HelloEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
+
 
 import java.util.List;
 
 @Service
-public class projectService {
+public class ProjectService {
 
-    private final projectRepository repo;
+    private final ProjectRepository repo;
 
-    public projectService(projectRepository repo) {
+    public ProjectService(ProjectRepository repo) {
         this.repo = repo;
     }
 
-    public projectEntity create(projectEntity entity) {
+    public ProjectEntity create(ProjectEntity entity) {
         return this.repo.save(entity);
     }
 
-    public List<projectEntity> readAll() {
+    public List<ProjectEntity> readAll() {
         return this.repo.findAll();
     }
 }
