@@ -20,8 +20,8 @@ public class CreateProjectDto {
     @NotNull(message = "Client Assignee ID is mandatory")
     private long clientAssigneeId;
 
-    @Size(min = 3, max = 255, message = "Description must be between 3 and 255 characters")
-    private String description;
+    @Size(min = 3, max = 255, message = "Name must be between 3 and 255 characters")
+    private String name;
 
     @Size(max = 255, message = "Comment must be less than 255 characters")
     private String comment;

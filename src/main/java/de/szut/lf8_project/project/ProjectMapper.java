@@ -48,7 +48,7 @@ public class ProjectMapper {
         entity.setAssigneeId(dto.getAssigneeId());
         entity.setClientId(dto.getClientId());
         entity.setClientAssigneeId(dto.getClientAssigneeId());
-        entity.setName(dto.getDescription());
+        entity.setName(dto.getName());
 
         entity.setComment(dto.getComment());
         entity.setStartDate(dto.getStartDate());
@@ -76,8 +76,8 @@ public class ProjectMapper {
         if(dto.getClientAssigneeId() != 0) {
             entity.setClientAssigneeId(dto.getClientAssigneeId());
         }
-        if(dto.getDescription() != null) {
-            entity.setDescription(dto.getDescription());
+        if(dto.getName() != null) {
+            entity.setName(dto.getName());
         }
         if(dto.getComment() != null) {
             entity.setComment(dto.getComment());
