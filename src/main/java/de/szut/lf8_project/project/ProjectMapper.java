@@ -2,6 +2,7 @@ package de.szut.lf8_project.project;
 
 import de.szut.lf8_project.project.dto.CreateProjectDto;
 import de.szut.lf8_project.project.dto.GetProjectDto;
+import de.szut.lf8_project.project.dto.GetProjectEmployeesDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,5 +41,13 @@ public class ProjectMapper {
         entity.setPlannedEndDate(dto.getPlannedEndDate());
         entity.setEndDate(dto.getEndDate());
         return entity;
+    }
+
+    public GetProjectEmployeesDto mapEntityToGetEmployeesDto(ProjectEntity entity) {
+        return new GetProjectEmployeesDto(
+                entity.getId(),
+                entity.getName(),
+                entity.getEmployees()
+        );
     }
 }

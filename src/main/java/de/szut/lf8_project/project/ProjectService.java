@@ -1,5 +1,6 @@
 package de.szut.lf8_project.project;
 
+import de.szut.lf8_project.exceptionHandling.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 
@@ -19,7 +20,8 @@ public class ProjectService {
     }
 
     public ProjectEntity readById(long id) {
-        return this.repo.findById(id).orElse(null);
+        return this.repo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Failed to resolve project with id "+ id));
     }
 
     public List<ProjectEntity> readAll() {

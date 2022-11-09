@@ -18,6 +18,6 @@ public class EmployeeService {
     }
 
     public List<EmployeeEntity> readAllEmployeesByProjectId(long id) {
-        return this.repository.findAll(id);
+        return this.repository.findAllByProjectId(id);
     }
 }
