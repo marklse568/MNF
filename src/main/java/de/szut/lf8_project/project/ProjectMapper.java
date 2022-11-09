@@ -1,5 +1,6 @@
 package de.szut.lf8_project.project;
 
+import de.szut.lf8_project.employee.dto.GetEmployeeDto;
 import de.szut.lf8_project.exceptionHandling.ResourceNotFoundException;
 import de.szut.lf8_project.project.dto.CreateProjectDto;
 import de.szut.lf8_project.project.dto.GetProjectDto;
@@ -62,10 +63,13 @@ public class ProjectMapper {
         return new GetProjectEmployeesDto(
                 entity.getId(),
                 entity.getName(),
-                entity.getEmployees()
+                entity.getEmployees().stream().map(employeeEntity -> new GetEmployeeDto(
+                        employeeEntity.getQualification(),
+                        employeeEntity.getId()
+                )).collect(Collectors.toSet())
         );
     }
-    
+
     public ProjectEntity createNewEntity(UpdateProjectDto dto) {
         ProjectEntity entity = service.readById(dto.getId());
         if (entity == null) {
