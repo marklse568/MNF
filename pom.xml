@@ -11,8 +11,8 @@
     <groupId>de.szut</groupId>
     <artifactId>lf8_project_starter</artifactId>
     <version>0.0.2-SNAPSHOT</version>
-    <name>lf8_project_starter</name>
-    <description>lf8_project_starter</description>
+    <name>ProjectService API</name>
+    <description>ProjectService API which interacts with the "Employees Management Micro-Service" to track project resources</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
