@@ -1,5 +1,6 @@
 package de.szut.lf8_project.project;
 
+import de.szut.lf8_project.exceptionHandling.ResourceNotFoundException;
 import de.szut.lf8_project.project.dto.CreateProjectDto;
 import de.szut.lf8_project.project.dto.GetProjectDto;
 import de.szut.lf8_project.project.dto.GetProjectEmployeesDto;
@@ -63,32 +64,37 @@ public class ProjectMapper {
                 entity.getName(),
                 entity.getEmployees()
         );
+    }
+    
     public ProjectEntity createNewEntity(UpdateProjectDto dto) {
         ProjectEntity entity = service.readById(dto.getId());
+        if (entity == null) {
+            throw new ResourceNotFoundException("Project with id " + dto.getId() + " not found");
+        }
         entity.setId(dto.getId());
 
-        if(dto.getAssigneeId() != 0) {
+        if (dto.getAssigneeId() != 0) {
             entity.setAssigneeId(dto.getAssigneeId());
         }
-        if(dto.getClientId() != 0) {
+        if (dto.getClientId() != 0) {
             entity.setClientId(dto.getClientId());
         }
-        if(dto.getClientAssigneeId() != 0) {
+        if (dto.getClientAssigneeId() != 0) {
             entity.setClientAssigneeId(dto.getClientAssigneeId());
         }
-        if(dto.getName() != null) {
+        if (dto.getName() != null) {
             entity.setName(dto.getName());
         }
-        if(dto.getComment() != null) {
+        if (dto.getComment() != null) {
             entity.setComment(dto.getComment());
         }
-        if(dto.getStartDate() != null) {
+        if (dto.getStartDate() != null) {
             entity.setStartDate(dto.getStartDate());
         }
-        if(dto.getPlannedEndDate() != null) {
+        if (dto.getPlannedEndDate() != null) {
             entity.setPlannedEndDate(dto.getPlannedEndDate());
         }
-        if(dto.getEndDate() != null) {
+        if (dto.getEndDate() != null) {
             entity.setEndDate(dto.getEndDate());
         }
         return entity;

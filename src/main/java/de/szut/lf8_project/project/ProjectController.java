@@ -1,10 +1,10 @@
 package de.szut.lf8_project.project;
 
 import de.szut.lf8_project.employee.dto.EmployeeGetDto;
-import de.szut.lf8_project.hello.dto.HelloGetDto;
 import de.szut.lf8_project.project.dto.CreateProjectDto;
 import de.szut.lf8_project.project.dto.GetProjectDto;
 import de.szut.lf8_project.project.dto.GetProjectEmployeesDto;
+import de.szut.lf8_project.project.dto.UpdateProjectDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "project")
@@ -79,6 +78,8 @@ public class ProjectController {
     @GetMapping("/{id}/employees")
     public GetProjectEmployeesDto getAllEmployeesOfProjectByProjectId(@PathVariable long id) {
         return this.mapper.mapEntityToGetEmployeesDto(service.readById(id));
+    }
+
     @Operation(summary = "updates a project")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "updated project",
@@ -87,6 +88,8 @@ public class ProjectController {
             @ApiResponse(responseCode = "400", description = "invalid JSON posted",
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "not authorized",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "resource not found",
                     content = @Content)})
     @PutMapping
     public GetProjectDto updateProject(@RequestBody @Valid UpdateProjectDto dto) {
