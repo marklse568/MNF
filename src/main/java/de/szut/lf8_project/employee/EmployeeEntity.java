@@ -18,9 +18,7 @@ public class EmployeeEntity {
 
     private String qualification;
 
-    private UUID projectId;
-
-    private String projectName;
+    //TODO: relation to Projects
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

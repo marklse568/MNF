@@ -17,5 +17,7 @@ public class EmployeeService {
         return this.repository.findAll();
     }
 
-
+    public List<EmployeeEntity> readAllEmployeesByProjectId(long id) {
+        return this.repository.findAll(id);
+    }
 }
