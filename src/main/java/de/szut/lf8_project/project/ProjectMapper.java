@@ -2,7 +2,6 @@ package de.szut.lf8_project.project;
 
 import de.szut.lf8_project.project.dto.CreateProjectDto;
 import de.szut.lf8_project.project.dto.GetProjectDto;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +16,7 @@ public class ProjectMapper {
                 entity.getAssigneeId(),
                 entity.getClientId(),
                 entity.getClientAssigneeId(),
-                entity.getDescription(),
+                entity.getName(),
                 entity.getComment(),
                 entity.getPlannedEndDate(),
                 entity.getStartDate(),
@@ -34,7 +33,7 @@ public class ProjectMapper {
         entity.setAssigneeId(dto.getAssigneeId());
         entity.setClientId(dto.getClientId());
         entity.setClientAssigneeId(dto.getClientAssigneeId());
-        entity.setDescription(dto.getDescription());
+        entity.setName(dto.getDescription());
 
         entity.setComment(dto.getComment());
         entity.setStartDate(dto.getStartDate());

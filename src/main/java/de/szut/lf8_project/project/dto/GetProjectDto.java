@@ -14,7 +14,7 @@ public class GetProjectDto {
     private long assigneeId;
     private long clientId;
     private long clientAssigneeId;
-    private String description;
+    private String name;
     private String comment;
     private Date plannedEndDate;
     private Date startDate;
