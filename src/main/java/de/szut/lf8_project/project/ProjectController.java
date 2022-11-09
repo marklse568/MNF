@@ -1,8 +1,10 @@
 package de.szut.lf8_project.project;
 
+import de.szut.lf8_project.employee.dto.EmployeeGetDto;
 import de.szut.lf8_project.hello.dto.HelloGetDto;
 import de.szut.lf8_project.project.dto.CreateProjectDto;
 import de.szut.lf8_project.project.dto.GetProjectDto;
+import de.szut.lf8_project.project.dto.GetProjectEmployeesDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "project")
@@ -66,5 +69,17 @@ public class ProjectController {
         ProjectEntity project = this.mapper.mapCreateDtoToEntity(dto);
         ProjectEntity createdProject = this.service.create(project);
         return this.mapper.mapEntityToGetDto(createdProject);
+    }
+
+    @Operation(summary = "find all employees by project id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "list of employees",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = EmployeeGetDto.class))}),
+            @ApiResponse(responseCode = "404", description = "project with this id was not found", content = @Content),
+            @ApiResponse(responseCode = "401", description = "not authorized", content = @Content)})
+    @GetMapping("/{id}/employees")
+    public GetProjectEmployeesDto getAllEmployeesOfProjectByProjectId(@PathVariable long id) {
+        return this.mapper.mapEntityToGetEmployeesDto(service.readById(id));
     }
 }

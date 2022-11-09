@@ -30,6 +30,6 @@ public class ProjectEntity {
     private Date startDate;
     private Date endDate;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<EmployeeEntity> employees;
 }
