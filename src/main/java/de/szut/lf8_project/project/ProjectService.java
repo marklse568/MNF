@@ -31,6 +31,9 @@ public class ProjectService {
     public void delete(long id) {
         ProjectEntity deleteProject = readById(id);
         repo.deleteById(id);
+        if(deleteProject != null ) {
+          throw new ResourceNotFoundException("Failed to delete the project a id is required ");
+        }
+        
     }
 }
-
