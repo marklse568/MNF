@@ -1,25 +1,44 @@
 package de.szut.lf8_project.project;
 
-import de.szut.lf8_project.hello.HelloEntity;
-import de.szut.lf8_project.hello.dto.HelloCreateDto;
-import de.szut.lf8_project.project.dto.ProjectCreateDto;
-import de.szut.lf8_project.project.dto.ProjectGetDto;
+import de.szut.lf8_project.project.dto.CreateProjectDto;
+import de.szut.lf8_project.project.dto.GetProjectDto;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectMapper {
-    public ProjectGetDto projectGetDtoMap(ProjectEntity entity) {return new ProjectGetDto(entity.getId(), entity.getCustomerId(), entity.getChargePersonId(), entity.getProjectDescription(), entity.getComment(), entity.getPersonInCharge(), entity.getStartDate(), 
-            entity.getPlannedEndDate(), entity.getEndDate());}
-    
-    public ProjectEntity CreateDtoToEntity(ProjectCreateDto dto) {
-        var entity = new ProjectEntity();
-        entity.setProjectDescription(entity.getProjectDescription());
-        entity.setComment(entity.getComment());
-        entity.setStartDate(entity.getStartDate());
-        entity.setPlannedEndDate(entity.getPlannedEndDate());
-        entity.setEndDate(entity.getEndDate());
+
+    public GetProjectDto mapEntityToGetDto(ProjectEntity entity) {
+        return new GetProjectDto(
+                entity.getId(),
+                entity.getAssigneeId(),
+                entity.getClientId(),
+                entity.getClientAssigneeId(),
+                entity.getName(),
+                entity.getComment(),
+                entity.getPlannedEndDate(),
+                entity.getStartDate(),
+                entity.getEndDate()
+        );
+    }
+
+    public List<GetProjectDto> mapEntityToGetDto(List<ProjectEntity> entities) {
+        return entities.stream().map(this::mapEntityToGetDto).collect(Collectors.toList());
+    }
+
+    public ProjectEntity mapCreateDtoToEntity(CreateProjectDto dto) {
+        ProjectEntity entity = new ProjectEntity();
+        entity.setAssigneeId(dto.getAssigneeId());
+        entity.setClientId(dto.getClientId());
+        entity.setClientAssigneeId(dto.getClientAssigneeId());
+        entity.setName(dto.getDescription());
+
+        entity.setComment(dto.getComment());
+        entity.setStartDate(dto.getStartDate());
+        entity.setPlannedEndDate(dto.getPlannedEndDate());
+        entity.setEndDate(dto.getEndDate());
         return entity;
     }
 }

@@ -18,6 +18,10 @@ public class ProjectService {
         return this.repo.save(entity);
     }
 
+    public ProjectEntity readById(long id) {
+        return this.repo.findById(id).orElse(null);
+    }
+
     public List<ProjectEntity> readAll() {
         return this.repo.findAll();
     }

@@ -1,24 +1,16 @@
-package de.szut.lf8_project.project;
+package de.szut.lf8_project.project.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity
-@Table(name = "project")
-public class ProjectEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class GetProjectDto {
     private long id;
-    
     private long assigneeId;
     private long clientId;
     private long clientAssigneeId;
