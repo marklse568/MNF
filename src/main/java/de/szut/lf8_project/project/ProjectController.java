@@ -10,8 +10,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -45,7 +43,7 @@ public class ProjectController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "project with corresponding id",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = HelloGetDto.class))}),
+                            schema = @Schema(implementation = GetProjectDto.class))}),
             @ApiResponse(responseCode = "404", description = "project with corresponding id not found",
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "not authorized",
@@ -59,7 +57,7 @@ public class ProjectController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "created project",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = HelloGetDto.class))}),
+                            schema = @Schema(implementation = GetProjectDto.class))}),
             @ApiResponse(responseCode = "400", description = "invalid JSON posted",
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "not authorized",
@@ -81,5 +79,19 @@ public class ProjectController {
     @GetMapping("/{id}/employees")
     public GetProjectEmployeesDto getAllEmployeesOfProjectByProjectId(@PathVariable long id) {
         return this.mapper.mapEntityToGetEmployeesDto(service.readById(id));
+    @Operation(summary = "updates a project")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "updated project",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = GetProjectDto.class))}),
+            @ApiResponse(responseCode = "400", description = "invalid JSON posted",
+                    content = @Content),
+            @ApiResponse(responseCode = "401", description = "not authorized",
+                    content = @Content)})
+    @PutMapping
+    public GetProjectDto updateProject(@RequestBody @Valid UpdateProjectDto dto) {
+        ProjectEntity newProject = this.mapper.mapUpdateDtoToEntity(dto);
+        ProjectEntity updatedProject = this.service.update(newProject);
+        return this.mapper.mapEntityToGetDto(updatedProject);
     }
 }

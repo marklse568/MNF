@@ -3,6 +3,7 @@ package de.szut.lf8_project.project;
 import de.szut.lf8_project.project.dto.CreateProjectDto;
 import de.szut.lf8_project.project.dto.GetProjectDto;
 import de.szut.lf8_project.project.dto.GetProjectEmployeesDto;
+import de.szut.lf8_project.project.dto.UpdateProjectDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +11,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProjectMapper {
+    private final ProjectService service;
+
+    public ProjectMapper(ProjectService service) {
+        this.service = service;
+    }
 
     public GetProjectDto mapEntityToGetDto(ProjectEntity entity) {
         return new GetProjectDto(
@@ -30,6 +36,14 @@ public class ProjectMapper {
     }
 
     public ProjectEntity mapCreateDtoToEntity(CreateProjectDto dto) {
+        return createNewEntity(dto);
+    }
+
+    public ProjectEntity mapUpdateDtoToEntity(UpdateProjectDto dto) {
+        return createNewEntity(dto);
+    }
+
+    public ProjectEntity createNewEntity(CreateProjectDto dto) {
         ProjectEntity entity = new ProjectEntity();
         entity.setAssigneeId(dto.getAssigneeId());
         entity.setClientId(dto.getClientId());
@@ -49,5 +63,34 @@ public class ProjectMapper {
                 entity.getName(),
                 entity.getEmployees()
         );
+    public ProjectEntity createNewEntity(UpdateProjectDto dto) {
+        ProjectEntity entity = service.readById(dto.getId());
+        entity.setId(dto.getId());
+
+        if(dto.getAssigneeId() != 0) {
+            entity.setAssigneeId(dto.getAssigneeId());
+        }
+        if(dto.getClientId() != 0) {
+            entity.setClientId(dto.getClientId());
+        }
+        if(dto.getClientAssigneeId() != 0) {
+            entity.setClientAssigneeId(dto.getClientAssigneeId());
+        }
+        if(dto.getDescription() != null) {
+            entity.setDescription(dto.getDescription());
+        }
+        if(dto.getComment() != null) {
+            entity.setComment(dto.getComment());
+        }
+        if(dto.getStartDate() != null) {
+            entity.setStartDate(dto.getStartDate());
+        }
+        if(dto.getPlannedEndDate() != null) {
+            entity.setPlannedEndDate(dto.getPlannedEndDate());
+        }
+        if(dto.getEndDate() != null) {
+            entity.setEndDate(dto.getEndDate());
+        }
+        return entity;
     }
 }

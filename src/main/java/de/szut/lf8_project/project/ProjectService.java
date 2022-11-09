@@ -3,7 +3,6 @@ package de.szut.lf8_project.project;
 import de.szut.lf8_project.exceptionHandling.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
 
 @Service
@@ -16,6 +15,10 @@ public class ProjectService {
     }
 
     public ProjectEntity create(ProjectEntity entity) {
+        return this.repo.save(entity);
+    }
+
+    public ProjectEntity update(ProjectEntity entity) {
         return this.repo.save(entity);
     }
 
