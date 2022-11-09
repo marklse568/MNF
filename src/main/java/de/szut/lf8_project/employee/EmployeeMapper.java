@@ -1,16 +1,14 @@
 package de.szut.lf8_project.employee;
 
-import de.szut.lf8_project.employee.dto.EmployeeGetDto;
+import de.szut.lf8_project.employee.dto.GetEmployeeDto;
+import de.szut.lf8_project.project.dto.GetProjectEmployeesDto;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeMapper {
-    public EmployeeGetDto mapToGetDto(EmployeeEntity employeeEntity) {
-        return new EmployeeGetDto(
-            employeeEntity.getQualification(),
-            employeeEntity.getProject().getId(),
-            employeeEntity.getProject().getName(),
-            employeeEntity.getId()
-        );
+    public GetEmployeeDto mapToGetDto(EmployeeEntity employeeEntity) {
+        return null;
     }
 }

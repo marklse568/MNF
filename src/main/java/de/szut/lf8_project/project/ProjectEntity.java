@@ -3,14 +3,13 @@ package de.szut.lf8_project.project;
 import de.szut.lf8_project.employee.EmployeeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
-@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
@@ -18,9 +17,9 @@ import java.util.Set;
 @Table(name = "project")
 public class ProjectEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-    
+
     private long assigneeId;
     private long clientId;
     private long clientAssigneeId;
@@ -30,6 +29,17 @@ public class ProjectEntity {
     private Date startDate;
     private Date endDate;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "project_employee", joinColumns = @JoinColumn(name = "projects"), inverseJoinColumns =
+    @JoinColumn(name = "employees"))
     private Set<EmployeeEntity> employees;
+
+    public ProjectEntity() {
+        this.employees = new HashSet<>();
+    }
+
+    public void addEmployee(EmployeeEntity employeeEntity) {
+        employees.add(employeeEntity);
+        employeeEntity.addProject(this);
+    }
 }

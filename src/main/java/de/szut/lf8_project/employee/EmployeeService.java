@@ -1,5 +1,6 @@
 package de.szut.lf8_project.employee;
 
+import de.szut.lf8_project.exceptionHandling.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class EmployeeService {
         return this.repository.findAll();
     }
 
-    public List<EmployeeEntity> readAllEmployeesByProjectId(long id) {
-        return this.repository.findAllByProjectId(id);
+    public EmployeeEntity readById(long id) {
+        return this.repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee with id " + id + " not found"));
     }
 }

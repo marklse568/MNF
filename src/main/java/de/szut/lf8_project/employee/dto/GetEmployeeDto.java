@@ -7,13 +7,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class EmployeeGetDto {
+public class GetEmployeeDto {
 
     private String qualification;
-
-    private long projectId;
-
-    private String projectName;
 
     private long id;
 }

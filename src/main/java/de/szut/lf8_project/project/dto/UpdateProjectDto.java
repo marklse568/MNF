@@ -9,15 +9,12 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class CreateProjectDto {
+public class UpdateProjectDto {
+    @NotNull(message = "Project ID is mandatory")
+    private long id;
 
-    @NotNull(message = "Assignee ID is mandatory")
     private long assigneeId;
-
-    @NotNull(message = "Client ID is mandatory")
     private long clientId;
-
-    @NotNull(message = "Client Assignee ID is mandatory")
     private long clientAssigneeId;
 
     @Size(min = 3, max = 255, message = "Name must be between 3 and 255 characters")
@@ -29,5 +26,4 @@ public class CreateProjectDto {
     private Date plannedEndDate;
     private Date startDate;
     private Date endDate;
-
 }
