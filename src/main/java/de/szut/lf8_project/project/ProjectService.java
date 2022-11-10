@@ -23,7 +23,7 @@ public class ProjectService {
         return this.repo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Failed to resolve project with id "+ id));
     }
-
+    
     public List<ProjectEntity> readAll() {
         return this.repo.findAll();
     }
