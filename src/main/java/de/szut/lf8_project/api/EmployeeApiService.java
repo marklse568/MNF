@@ -63,6 +63,11 @@ public class EmployeeApiService {
         }
     }
 
+    public void validateEmployeeId(long id, String authorizationHeader) {
+        // getEmployeeById will already throw an exception if any errors occur, thus no further validation is needed
+        this.getEmployeeById(id, authorizationHeader);
+    }
+
     private HttpHeaders createHeaders(String authorizationHeader) {
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, authorizationHeader);

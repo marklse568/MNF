@@ -26,13 +26,15 @@ public class SampleDataCreator implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         var employeeOne = new EmployeeEntity();
         employeeOne.setId(987);
+        employeeOne = this.employeeRepo.saveAndFlush(employeeOne);
 
         var employeeTwo = new EmployeeEntity();
         employeeTwo.setId(654);
+        employeeTwo = this.employeeRepo.saveAndFlush(employeeTwo);
 
         var employeeThree = new EmployeeEntity();
         employeeThree.setId(312);
-
+        employeeThree = this.employeeRepo.saveAndFlush(employeeThree);
 
         var projectOne = new ProjectEntity();
         projectOne.setName("Project Beluga");
@@ -76,10 +78,6 @@ public class SampleDataCreator implements ApplicationRunner {
         qualificationsFour.setProject(projectThree);
         qualificationsFour.setQualification("CI/CD");
 
-
-        this.employeeRepo.save(employeeOne);
-        this.employeeRepo.save(employeeTwo);
-        this.employeeRepo.save(employeeThree);
 
         this.projectRepo.save(projectOne);
         this.projectRepo.save(projectTwo);

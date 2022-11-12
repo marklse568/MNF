@@ -52,14 +52,6 @@ public class ProjectMapper {
     }
 
     public ProjectEntity mapCreateDtoToEntity(CreateProjectDto dto) {
-        return createNewEntity(dto);
-    }
-
-    public ProjectEntity mapUpdateDtoToEntity(UpdateProjectDto dto) {
-        return updateEntity(dto);
-    }
-
-    public ProjectEntity createNewEntity(CreateProjectDto dto) {
         ProjectEntity entity = new ProjectEntity();
         entity.setResponsibleEmployee(this.employeeService.readById(dto.getResponsibleEmployeeId()));
         entity.setClientId(dto.getClientId());
@@ -73,22 +65,7 @@ public class ProjectMapper {
         return entity;
     }
 
-    public GetProjectEmployeesDto mapEntityToGetProjectEmployeesDto(ProjectEntity entity) {
-        return new GetProjectEmployeesDto(
-                entity.getId(),
-                entity.getName(),
-                entity.getJoinedEmployees().stream().map(this::mapEntityToGetEmployeesDto).collect(Collectors.toSet())
-        );
-    }
-
-    public GetEmployeeDto mapEntityToGetEmployeesDto(EmployeeProjectEntity entity) {
-        return new GetEmployeeDto(
-                entity.getQualification(),
-                entity.getEmployee().getId()
-        );
-    }
-
-    public ProjectEntity updateEntity(UpdateProjectDto dto) {
+    public ProjectEntity mapUpdateDtoToEntity(UpdateProjectDto dto) {
         ProjectEntity entity = service.readById(dto.getId());
         if (entity == null) {
             throw new ResourceNotFoundException("Project with id " + dto.getId() + " not found");
@@ -120,5 +97,20 @@ public class ProjectMapper {
             entity.setEndDate(dto.getEndDate());
         }
         return entity;
+    }
+
+    public GetProjectEmployeesDto mapEntityToGetProjectEmployeesDto(ProjectEntity entity) {
+        return new GetProjectEmployeesDto(
+                entity.getId(),
+                entity.getName(),
+                entity.getJoinedEmployees().stream().map(this::mapEntityToGetEmployeesDto).collect(Collectors.toSet())
+        );
+    }
+
+    public GetEmployeeDto mapEntityToGetEmployeesDto(EmployeeProjectEntity entity) {
+        return new GetEmployeeDto(
+                entity.getQualification(),
+                entity.getEmployee().getId()
+        );
     }
 }

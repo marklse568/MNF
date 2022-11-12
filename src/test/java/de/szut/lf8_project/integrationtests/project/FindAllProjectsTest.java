@@ -1,5 +1,6 @@
 package de.szut.lf8_project.integrationtests.project;
 
+import de.szut.lf8_project.employee.EmployeeEntity;
 import de.szut.lf8_project.integrationtests.BaseIntegrationTest;
 import de.szut.lf8_project.project.ProjectEntity;
 import de.szut.lf8_project.testcontainers.AbstractIntegrationTest;
@@ -13,12 +14,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class FindAllProjectsTest extends BaseIntegrationTest {
     @Test
     void findAllProjects() throws Exception {
-        final ProjectEntity project = new ProjectEntity();
-        project.setAssigneeId(123);
+        EmployeeEntity employee = new EmployeeEntity();
+        employee.setId(9);
+        employee = this.employeeRepository.saveAndFlush(employee);
+
+        ProjectEntity project = new ProjectEntity();
+        project.setResponsibleEmployee(employee);
         project.setClientId(456);
-        project.setClientAssigneeId(789);
+        project.setClientContactPersonInfo("Test123");
         project.setComment("to the moon");
-        this.projectRepository.save(project);
+        project = this.projectRepository.saveAndFlush(project);
 
         long projectId = project.getId();
 
@@ -26,9 +31,9 @@ public class FindAllProjectsTest extends BaseIntegrationTest {
                         .header("Authorization", generateJwt()))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.[0].id", is((int) projectId)))
-                .andExpect(jsonPath("$.[0].assigneeId", is(123)))
+                .andExpect(jsonPath("$.[0].responsibleEmployeeId", is(123)))
                 .andExpect(jsonPath("$.[0].clientId", is(456)))
-                .andExpect(jsonPath("$.[0].clientAssigneeId", is(789)))
+                .andExpect(jsonPath("$.[0].clientContactPersonInfo", is("Test123")))
                 .andExpect(jsonPath("$.[0].comment", is("to the moon")))
                 .andReturn()
                 .getResponse()

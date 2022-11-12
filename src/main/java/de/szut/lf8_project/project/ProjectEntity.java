@@ -31,7 +31,7 @@ public class ProjectEntity {
     private Date startDate;
     private Date endDate;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = EmployeeEntity.class)
+    @ManyToOne
     private EmployeeEntity responsibleEmployee;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "project")
