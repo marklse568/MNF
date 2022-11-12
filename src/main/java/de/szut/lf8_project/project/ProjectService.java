@@ -36,5 +36,16 @@ public class ProjectService {
     public List<ProjectEntity> readAll() {
         return this.repo.findAll();
     }
+
+    public void delete(long id) {
+        ProjectEntity deleteProject = readById(id);
+        repo.deleteById(id);
+        if(deleteProject != null ) {
+            throw new ResourceNotFoundException("Failed to delete project");
+        }
+
+    }
+    
+    
 }
 
