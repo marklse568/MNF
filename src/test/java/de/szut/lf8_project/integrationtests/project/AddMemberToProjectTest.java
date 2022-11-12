@@ -14,21 +14,21 @@ public class AddMemberToProjectTest extends BaseIntegrationTest {
     void addMemberToProject() throws Exception {
         EmployeeEntity employee = new EmployeeEntity();
         employee.setId(9);
-        this.employeeRepository.saveAndFlush(employee);
+        employee = this.employeeRepository.saveAndFlush(employee);
 
-        final ProjectEntity project = new ProjectEntity();
+        ProjectEntity project = new ProjectEntity();
         project.setResponsibleEmployee(employee);
         project.setClientId(456);
         project.setClientContactPersonInfo("Test123");
         project.setComment("to the moon");
-        this.projectRepository.save(project);
+        project = this.projectRepository.saveAndFlush(project);
 
         String content = "{\"qualification\": \"Modellbahn-Purist\"}";
 
         /*
          The following code will solely check for the request status not being any server error status
          since we can't guarantee the availability/integrity of the chosen data in the external Employee API
-         nor the
+         nor the availability of the API itself
         */
         this.mockMvc.perform(put(String.format("/project/%d/employees/9", project.getId()))
                         .content(content).contentType(MediaType.APPLICATION_JSON)
