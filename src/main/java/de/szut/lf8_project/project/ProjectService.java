@@ -24,13 +24,12 @@ public class ProjectService {
     }
 
     public ProjectEntity addEmployeeToProject(ProjectEntity project, EmployeeEntity employee) {
-        project.addEmployee(employee);
         return this.repo.save(project);
     }
 
     public ProjectEntity readById(long id) {
         return this.repo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Failed to resolve project with id "+ id));
+                .orElseThrow(() -> new ResourceNotFoundException("Failed to resolve project with id " + id));
     }
 
     public List<ProjectEntity> readAll() {

@@ -2,6 +2,8 @@ package de.szut.lf8_project.config;
 
 import de.szut.lf8_project.employee.EmployeeEntity;
 import de.szut.lf8_project.employee.EmployeeRepository;
+import de.szut.lf8_project.employee.employee_project.EmployeeProjectEntity;
+import de.szut.lf8_project.employee.employee_project.EmployeeProjectRepository;
 import de.szut.lf8_project.project.ProjectEntity;
 import de.szut.lf8_project.project.ProjectRepository;
 import org.springframework.boot.ApplicationArguments;
@@ -12,9 +14,13 @@ import org.springframework.stereotype.Component;
 public class SampleDataCreator implements ApplicationRunner {
 
     private final ProjectRepository projectRepo;
+    private final EmployeeRepository employeeRepo;
+    private final EmployeeProjectRepository employeeProjectRepo;
 
-    public SampleDataCreator(ProjectRepository projectRepo) {
+    public SampleDataCreator(ProjectRepository projectRepo, EmployeeRepository employeeRepo, EmployeeProjectRepository employeeProjectRepo) {
         this.projectRepo = projectRepo;
+        this.employeeRepo = employeeRepo;
+        this.employeeProjectRepo = employeeProjectRepo;
     }
 
     public void run(ApplicationArguments args) {
@@ -41,25 +47,35 @@ public class SampleDataCreator implements ApplicationRunner {
 
 
         var employeeOne = new EmployeeEntity();
-        employeeOne.setQualification("Java");
-
         var employeeTwo = new EmployeeEntity();
-        employeeTwo.setQualification("Python");
-
         var employeeThree = new EmployeeEntity();
-        employeeThree.setQualification("Rust");
 
-        projectOne.addEmployee(employeeOne);
+        var qualificationsOne = new EmployeeProjectEntity();
+        qualificationsOne.setEmployee(employeeOne);
+        qualificationsOne.setProject(projectOne);
+        qualificationsOne.setQualification("Javascript");
 
-        projectTwo.addEmployee(employeeTwo);
-        projectTwo.addEmployee(employeeThree);
+        var qualificationsTwo = new EmployeeProjectEntity();
+        qualificationsTwo.setEmployee(employeeTwo);
+        qualificationsTwo.setProject(projectTwo);
+        qualificationsTwo.setQualification("Java");
 
-        projectThree.addEmployee(employeeOne);
-        projectThree.addEmployee(employeeTwo);
-        projectThree.addEmployee(employeeThree);
+        var qualificationsThree = new EmployeeProjectEntity();
+        qualificationsThree.setEmployee(employeeThree);
+        qualificationsThree.setProject(projectThree);
+        qualificationsThree.setQualification("C++");
+        qualificationsThree.setQualification("Python");
 
-        this.projectRepo.saveAndFlush(projectOne);
-        this.projectRepo.saveAndFlush(projectTwo);
-        this.projectRepo.saveAndFlush(projectThree);
+        this.projectRepo.save(projectOne);
+        this.projectRepo.save(projectTwo);
+        this.projectRepo.save(projectThree);
+
+        this.employeeRepo.save(employeeOne);
+        this.employeeRepo.save(employeeTwo);
+        this.employeeRepo.save(employeeThree);
+
+        this.employeeProjectRepo.save(qualificationsOne);
+        this.employeeProjectRepo.save(qualificationsTwo);
+        this.employeeProjectRepo.save(qualificationsThree);
     }
 }
