@@ -67,14 +67,7 @@ public class ProjectMapper {
 
     public ProjectEntity mapUpdateDtoToEntity(UpdateProjectDto dto) {
         ProjectEntity entity = service.readById(dto.getId());
-        if (entity == null) {
-            throw new ResourceNotFoundException("Project with id " + dto.getId() + " not found");
-        }
-        entity.setId(dto.getId());
 
-        if (dto.getResponsibleEmployeeId() != 0) {
-            entity.setResponsibleEmployee(this.employeeService.readOrCreateById(dto.getResponsibleEmployeeId()));
-        }
         if (dto.getClientId() != 0) {
             entity.setClientId(dto.getClientId());
         }
