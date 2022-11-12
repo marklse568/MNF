@@ -13,9 +13,9 @@ import java.util.Set;
 @Setter
 public class GetProjectDto {
     private long id;
-    private long assigneeId;
+    private long responsibleEmployeeId;
     private long clientId;
-    private long clientAssigneeId;
+    private String clientContactPersonInfo;
     private String name;
     private String comment;
     private Date plannedEndDate;
