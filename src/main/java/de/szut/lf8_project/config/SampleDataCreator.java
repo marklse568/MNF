@@ -47,8 +47,11 @@ public class SampleDataCreator implements ApplicationRunner {
 
 
         var employeeOne = new EmployeeEntity();
+        employeeOne.setId(987);
         var employeeTwo = new EmployeeEntity();
+        employeeTwo.setId(654);
         var employeeThree = new EmployeeEntity();
+        employeeThree.setId(312);
 
         var qualificationsOne = new EmployeeProjectEntity();
         qualificationsOne.setEmployee(employeeOne);

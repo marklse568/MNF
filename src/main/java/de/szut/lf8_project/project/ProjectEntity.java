@@ -32,5 +32,5 @@ public class ProjectEntity {
     private Date endDate;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "project")
-    private Set<EmployeeProjectEntity> qualifications = new HashSet<>();
+    private Set<EmployeeProjectEntity> joinedEmployees = new HashSet<>();
 }

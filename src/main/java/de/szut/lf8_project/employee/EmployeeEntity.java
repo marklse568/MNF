@@ -18,9 +18,8 @@ import java.util.Set;
 @Table(name = "employee")
 public class EmployeeEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "employee")
-    private Set<EmployeeProjectEntity> qualifications = new HashSet<>();
+    private Set<EmployeeProjectEntity> joinedProjects = new HashSet<>();
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 }

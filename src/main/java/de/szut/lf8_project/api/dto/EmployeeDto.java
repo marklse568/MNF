@@ -3,17 +3,18 @@ package de.szut.lf8_project.api.dto;
 import lombok.Data;
 
 import java.util.Arrays;
+import java.util.Set;
 
 @Data
 public class EmployeeDto {
-    private int id;
+    private long id;
     private String lastName;
     private String firstName;
     private String street;
     private String postcode;
     private String city;
     private String phone;
-    private String[] skillSet;
+    private Set<String> skillSet;
 
     @Override
     public String toString() {
@@ -25,6 +26,6 @@ public class EmployeeDto {
                 "\npostcode: " + postcode +
                 "\ncity: " + city +
                 "\nphone: " + phone +
-                "\nskillSet: " + Arrays.toString(skillSet);
+                "\nskillSet: " + skillSet.toString();
     }
 }
