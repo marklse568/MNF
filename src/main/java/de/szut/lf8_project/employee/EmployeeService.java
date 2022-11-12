@@ -27,11 +27,10 @@ public class EmployeeService {
 
         var newEmployee = new EmployeeEntity();
         newEmployee.setId(id);
-        this.create(newEmployee);
-        return newEmployee;
+        return this.create(newEmployee);
     }
 
     public EmployeeEntity create(EmployeeEntity entity) {
-        return this.repository.save(entity);
+        return this.repository.saveAndFlush(entity);
     }
 }

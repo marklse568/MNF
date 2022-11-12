@@ -32,15 +32,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleConflictException(ConflictException ex, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.CONFLICT);
-        
-    @ExceptionHandler(UnknownApiException.class)
-    public ResponseEntity<?> handleUnknownApiException(UnknownApiException ex, WebRequest request) {
-        ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(UnprocessableEntityException.class)
-    public ResponseEntity<?> handleUnprocessableEntityException(UnprocessableEntityException ex, WebRequest request) {
+    @ExceptionHandler(UnknownApiException.class)
+    public ResponseEntity<?> handleUnknownApiException(UnknownApiException ex, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
