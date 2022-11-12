@@ -21,9 +21,7 @@ public class ProjectMapper {
     }
 
     public GetProjectDto mapEntityToGetDto(ProjectEntity entity) {
-        var qualifications = entity.getQualifications();
-        var qualificationsDto =
-                qualifications.stream().map(this::mapQualificationEntityToGetDto).collect(Collectors.toSet());
+        var employeeProjectEntities = entity.getJoinedEmployees();
 
         return new GetProjectDto(
                 entity.getId(),
@@ -35,7 +33,7 @@ public class ProjectMapper {
                 entity.getPlannedEndDate(),
                 entity.getStartDate(),
                 entity.getEndDate(),
-                qualificationsDto
+                employeeProjectEntities.stream().map(this::mapQualificationEntityToGetDto).collect(Collectors.toSet())
         );
     }
 

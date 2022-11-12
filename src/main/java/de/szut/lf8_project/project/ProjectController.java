@@ -100,8 +100,8 @@ public class ProjectController {
         this.employeeApiService.validateEmployeeIdAndQualification(employeeId, dto.getQualification(), authorization);
         ProjectEntity project = projectService.readById(id);
         EmployeeEntity employee = employeeService.readById(employeeId);
-        var updatedProject = this.projectService.addEmployeeToProject(project, employee, dto.getQualification());
-        return this.mapper.mapEntityToGetProjectEmployeesDto(updatedProject);
+        var employeeProjectEntity = this.projectService.addEmployeeToProject(project, employee, dto.getQualification());
+        return this.mapper.mapEntityToGetProjectEmployeesDto(employeeProjectEntity.getProject());
     }
 
     @Operation(summary = "updates a project")
