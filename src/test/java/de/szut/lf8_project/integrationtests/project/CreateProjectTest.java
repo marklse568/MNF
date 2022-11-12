@@ -33,7 +33,7 @@ public class CreateProjectTest extends BaseIntegrationTest {
          The following code will solely check for the request status not being any server error status
          since we can't guarantee the availability/integrity of the chosen data in the external Employee API
          nor the availability of the API itself.
-         This is needed since the ID of the responsible employee will be checked against the Employee Service
+         This is needed since the ID of the responsible employee will be checked against the Employee API
         */
         this.mockMvc.perform(put("/project")
                         .content(content).contentType(MediaType.APPLICATION_JSON)

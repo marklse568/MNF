@@ -126,8 +126,8 @@ public class ProjectController {
             this.customerApiService.validateClientId(dto.getClientId(), authorization);
         }
 
-        ProjectEntity newProject = this.mapper.mapUpdateDtoToEntity(dto);
-        newProject = this.projectService.update(newProject);
-        return this.mapper.mapEntityToGetDto(newProject);
+        ProjectEntity updatedProject = this.mapper.mapUpdateDtoToEntity(dto);
+        updatedProject = this.projectService.update(updatedProject);
+        return this.mapper.mapEntityToGetDto(updatedProject);
     }
 }
