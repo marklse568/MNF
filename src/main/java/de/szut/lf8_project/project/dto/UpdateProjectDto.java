@@ -13,9 +13,9 @@ public class UpdateProjectDto {
     @NotNull(message = "Project ID is mandatory")
     private long id;
 
-    private long assigneeId;
+    private long responsibleEmployeeId;
     private long clientId;
-    private long clientAssigneeId;
+    private String clientContactPersonInfo;
 
     @Size(min = 3, max = 255, message = "Name must be between 3 and 255 characters")
     private String name;

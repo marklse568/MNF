@@ -68,10 +68,11 @@ public class ProjectController {
             @ApiResponse(responseCode = "401", description = "not authorized",
                     content = @Content)})
     @PostMapping
-    public GetProjectDto createProject(@RequestBody @Valid CreateProjectDto dto) {
+    public GetProjectDto createProject(@RequestBody @Valid CreateProjectDto dto,
+                                       @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
+        this.employeeApiService.validateEmployeeId(dto.getResponsibleEmployeeId(), authorization);
         ProjectEntity project = this.mapper.mapCreateDtoToEntity(dto);
-        ProjectEntity createdProject = this.projectService.create(project);
-        return this.mapper.mapEntityToGetDto(createdProject);
+        return this.mapper.mapEntityToGetDto(this.projectService.create(project));
     }
 
     @Operation(summary = "find all employees by project id")
@@ -99,7 +100,7 @@ public class ProjectController {
                                                        @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
         this.employeeApiService.validateEmployeeIdAndQualification(employeeId, dto.getQualification(), authorization);
         ProjectEntity project = projectService.readById(id);
-        EmployeeEntity employee = employeeService.readById(employeeId);
+        EmployeeEntity employee = employeeService.readOrCreateById(employeeId);
         var employeeProjectEntity = this.projectService.addEmployeeToProject(project, employee, dto.getQualification());
         return this.mapper.mapEntityToGetProjectEmployeesDto(employeeProjectEntity.getProject());
     }

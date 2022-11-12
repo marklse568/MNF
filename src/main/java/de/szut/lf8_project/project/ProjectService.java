@@ -22,7 +22,7 @@ public class ProjectService {
     }
 
     public ProjectEntity create(ProjectEntity entity) {
-        return this.repo.save(entity);
+        return this.repo.saveAndFlush(entity);
     }
 
     public ProjectEntity update(ProjectEntity entity) {

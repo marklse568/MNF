@@ -1,5 +1,6 @@
 package de.szut.lf8_project.project;
 
+import de.szut.lf8_project.employee.EmployeeEntity;
 import de.szut.lf8_project.employee.employee_project.EmployeeProjectEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,14 +23,16 @@ public class ProjectEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    private long assigneeId;
     private long clientId;
-    private long clientAssigneeId;
+    private String clientContactPersonInfo;
     private String name;
     private String comment;
     private Date plannedEndDate;
     private Date startDate;
     private Date endDate;
+
+    @ManyToOne
+    private EmployeeEntity responsibleEmployee;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "project")
     private Set<EmployeeProjectEntity> joinedEmployees = new HashSet<>();

@@ -24,34 +24,39 @@ public class SampleDataCreator implements ApplicationRunner {
     }
 
     public void run(ApplicationArguments args) {
+        var employeeOne = new EmployeeEntity();
+        employeeOne.setId(987);
+        employeeOne = this.employeeRepo.saveAndFlush(employeeOne);
+
+        var employeeTwo = new EmployeeEntity();
+        employeeTwo.setId(654);
+        employeeTwo = this.employeeRepo.saveAndFlush(employeeTwo);
+
+        var employeeThree = new EmployeeEntity();
+        employeeThree.setId(312);
+        employeeThree = this.employeeRepo.saveAndFlush(employeeThree);
+
         var projectOne = new ProjectEntity();
         projectOne.setName("Project Beluga");
-        projectOne.setAssigneeId(123);
+        projectOne.setResponsibleEmployee(employeeOne);
         projectOne.setClientId(456);
-        projectOne.setClientAssigneeId(789);
+        projectOne.setClientContactPersonInfo("jane@doe.fishing");
         projectOne.setComment("to the moon");
 
         var projectTwo = new ProjectEntity();
         projectTwo.setName("Project Whale");
-        projectTwo.setAssigneeId(111);
+        projectTwo.setResponsibleEmployee(employeeOne);
         projectTwo.setClientId(222);
-        projectTwo.setClientAssigneeId(333);
+        projectTwo.setClientContactPersonInfo("john@doe.fishing");
         projectTwo.setComment("to the stars");
 
         var projectThree = new ProjectEntity();
         projectThree.setName("Project Dolphin");
-        projectThree.setAssigneeId(444);
+        projectThree.setResponsibleEmployee(employeeOne);
         projectThree.setClientId(555);
-        projectThree.setClientAssigneeId(666);
+        projectThree.setClientContactPersonInfo("juergen_der_zerstoerer@web.de");
         projectThree.setComment("to the sun");
 
-
-        var employeeOne = new EmployeeEntity();
-        employeeOne.setId(987);
-        var employeeTwo = new EmployeeEntity();
-        employeeTwo.setId(654);
-        var employeeThree = new EmployeeEntity();
-        employeeThree.setId(312);
 
         var qualificationsOne = new EmployeeProjectEntity();
         qualificationsOne.setEmployee(employeeOne);
@@ -73,13 +78,10 @@ public class SampleDataCreator implements ApplicationRunner {
         qualificationsFour.setProject(projectThree);
         qualificationsFour.setQualification("CI/CD");
 
+
         this.projectRepo.save(projectOne);
         this.projectRepo.save(projectTwo);
         this.projectRepo.save(projectThree);
-
-        this.employeeRepo.save(employeeOne);
-        this.employeeRepo.save(employeeTwo);
-        this.employeeRepo.save(employeeThree);
 
         this.employeeProjectRepo.save(qualificationsOne);
         this.employeeProjectRepo.save(qualificationsTwo);
