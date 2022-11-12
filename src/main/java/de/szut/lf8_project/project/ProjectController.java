@@ -81,7 +81,7 @@ public class ProjectController {
             @ApiResponse(responseCode = "401", description = "not authorized", content = @Content)})
     @GetMapping("/{id}/employees")
     public GetProjectEmployeesDto getAllEmployeesOfProjectByProjectId(@PathVariable long id) {
-        return this.mapper.mapEntityToGetEmployeesDto(projectService.readById(id));
+        return this.mapper.mapEntityToGetProjectEmployeesDto(projectService.readById(id));
     }
 
     @Operation(summary = "add employee to project")
@@ -96,7 +96,7 @@ public class ProjectController {
         ProjectEntity project = projectService.readById(id);
         EmployeeEntity employee = employeeService.readById(employeeId);
         var updatedProject = this.projectService.addEmployeeToProject(project, employee);
-        return this.mapper.mapEntityToGetEmployeesDto(updatedProject);
+        return this.mapper.mapEntityToGetProjectEmployeesDto(updatedProject);
     }
 
     @Operation(summary = "updates a project")

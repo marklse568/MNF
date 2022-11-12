@@ -72,8 +72,19 @@ public class ProjectMapper {
         return entity;
     }
 
-    public GetProjectEmployeesDto mapEntityToGetEmployeesDto(ProjectEntity entity) {
-        return null;
+    public GetProjectEmployeesDto mapEntityToGetProjectEmployeesDto(ProjectEntity entity) {
+        return new GetProjectEmployeesDto(
+                entity.getId(),
+                entity.getName(),
+                entity.getJoinedEmployees().stream().map(this::mapEntityToGetEmployeesDto).collect(Collectors.toSet())
+        );
+    }
+
+    public GetEmployeeDto mapEntityToGetEmployeesDto(EmployeeProjectEntity entity) {
+        return new GetEmployeeDto(
+                entity.getQualification(),
+                entity.getEmployee().getId()
+        );
     }
 
     public ProjectEntity createNewEntity(UpdateProjectDto dto) {
