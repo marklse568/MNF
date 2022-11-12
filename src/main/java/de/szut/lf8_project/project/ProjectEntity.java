@@ -1,8 +1,9 @@
 package de.szut.lf8_project.project;
 
-import de.szut.lf8_project.employee.EmployeeEntity;
+import de.szut.lf8_project.employee.employee_project.EmployeeProjectEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -29,17 +31,6 @@ public class ProjectEntity {
     private Date startDate;
     private Date endDate;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "project_employee", joinColumns = @JoinColumn(name = "projects"), inverseJoinColumns =
-    @JoinColumn(name = "employees"))
-    private Set<EmployeeEntity> employees;
-
-    public ProjectEntity() {
-        this.employees = new HashSet<>();
-    }
-
-    public void addEmployee(EmployeeEntity employeeEntity) {
-        employees.add(employeeEntity);
-        employeeEntity.addProject(this);
-    }
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "project")
+    private Set<EmployeeProjectEntity> qualifications = new HashSet<>();
 }
