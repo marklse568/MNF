@@ -21,6 +21,5 @@ public class EmployeeEntity {
     private Set<EmployeeProjectEntity> joinedProjects = new HashSet<>();
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 }

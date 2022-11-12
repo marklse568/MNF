@@ -14,9 +14,11 @@ import java.util.List;
 public class ProjectService {
 
     private final ProjectRepository repo;
+    private final EmployeeProjectRepository entityLinkRepo;
 
-    public ProjectService(ProjectRepository repo) {
+    public ProjectService(ProjectRepository repo, EmployeeProjectRepository entityLinkRepo) {
         this.repo = repo;
+        this.entityLinkRepo = entityLinkRepo;
     }
 
     public ProjectEntity create(ProjectEntity entity) {
