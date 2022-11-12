@@ -38,14 +38,8 @@ public class ProjectService {
     }
 
     public void delete(long id) {
-        ProjectEntity deleteProject = readById(id);
+        ProjectEntity deleteById = readById(id);
         repo.deleteById(id);
-        if(deleteProject != null ) {
-            throw new ResourceNotFoundException("Failed to delete project");
-        }
-
     }
-    
-    
 }
 
