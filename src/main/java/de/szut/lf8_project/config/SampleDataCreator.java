@@ -63,8 +63,12 @@ public class SampleDataCreator implements ApplicationRunner {
         var qualificationsThree = new EmployeeProjectEntity();
         qualificationsThree.setEmployee(employeeThree);
         qualificationsThree.setProject(projectThree);
-        qualificationsThree.setQualification("C++");
         qualificationsThree.setQualification("Python");
+
+        var qualificationsFour = new EmployeeProjectEntity();
+        qualificationsFour.setEmployee(employeeOne);
+        qualificationsFour.setProject(projectThree);
+        qualificationsFour.setQualification("CI/CD");
 
         this.projectRepo.save(projectOne);
         this.projectRepo.save(projectTwo);
@@ -77,5 +81,6 @@ public class SampleDataCreator implements ApplicationRunner {
         this.employeeProjectRepo.save(qualificationsOne);
         this.employeeProjectRepo.save(qualificationsTwo);
         this.employeeProjectRepo.save(qualificationsThree);
+        this.employeeProjectRepo.save(qualificationsFour);
     }
 }
