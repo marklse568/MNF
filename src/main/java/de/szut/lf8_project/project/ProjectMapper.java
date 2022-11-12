@@ -53,7 +53,7 @@ public class ProjectMapper {
 
     public ProjectEntity mapCreateDtoToEntity(CreateProjectDto dto) {
         ProjectEntity entity = new ProjectEntity();
-        entity.setResponsibleEmployee(this.employeeService.readById(dto.getResponsibleEmployeeId()));
+        entity.setResponsibleEmployee(this.employeeService.readOrCreateById(dto.getResponsibleEmployeeId()));
         entity.setClientId(dto.getClientId());
         entity.setClientContactPersonInfo(dto.getClientContactPersonInfo());
         entity.setName(dto.getName());
@@ -73,7 +73,7 @@ public class ProjectMapper {
         entity.setId(dto.getId());
 
         if (dto.getResponsibleEmployeeId() != 0) {
-            entity.setResponsibleEmployee(this.employeeService.readById(dto.getResponsibleEmployeeId()));
+            entity.setResponsibleEmployee(this.employeeService.readOrCreateById(dto.getResponsibleEmployeeId()));
         }
         if (dto.getClientId() != 0) {
             entity.setClientId(dto.getClientId());

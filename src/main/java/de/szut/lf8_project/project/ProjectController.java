@@ -100,7 +100,7 @@ public class ProjectController {
                                                        @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
         this.employeeApiService.validateEmployeeIdAndQualification(employeeId, dto.getQualification(), authorization);
         ProjectEntity project = projectService.readById(id);
-        EmployeeEntity employee = employeeService.readById(employeeId);
+        EmployeeEntity employee = employeeService.readOrCreateById(employeeId);
         var employeeProjectEntity = this.projectService.addEmployeeToProject(project, employee, dto.getQualification());
         return this.mapper.mapEntityToGetProjectEmployeesDto(employeeProjectEntity.getProject());
     }
