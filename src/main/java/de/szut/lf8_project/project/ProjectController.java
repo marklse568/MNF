@@ -1,5 +1,6 @@
 package de.szut.lf8_project.project;
 
+import de.szut.lf8_project.api.CustomerApiService;
 import de.szut.lf8_project.api.EmployeeApiService;
 import de.szut.lf8_project.employee.EmployeeEntity;
 import de.szut.lf8_project.employee.EmployeeService;
@@ -23,13 +24,15 @@ public class ProjectController {
     private final EmployeeService employeeService;
     private final ProjectMapper mapper;
     private final EmployeeApiService employeeApiService;
+    private final CustomerApiService customerApiService;
 
-    public ProjectController(ProjectService projectService,EmployeeService employeeService, ProjectMapper mapper,
-                             EmployeeApiService employeeApiService) {
+    public ProjectController(ProjectService projectService, EmployeeService employeeService, ProjectMapper mapper,
+                             EmployeeApiService employeeApiService, CustomerApiService customerApiService) {
         this.projectService = projectService;
         this.employeeService = employeeService;
         this.mapper = mapper;
         this.employeeApiService = employeeApiService;
+        this.customerApiService = customerApiService;
     }
 
     @Operation(summary = "delivers a list of projects")
@@ -117,9 +120,14 @@ public class ProjectController {
             @ApiResponse(responseCode = "404", description = "resource not found",
                     content = @Content)})
     @PutMapping
-    public GetProjectDto updateProject(@RequestBody @Valid UpdateProjectDto dto) {
-        ProjectEntity newProject = this.mapper.mapUpdateDtoToEntity(dto);
-        ProjectEntity updatedProject = this.projectService.update(newProject);
+    public GetProjectDto updateProject(@RequestBody @Valid UpdateProjectDto dto,
+                                       @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
+        if (dto.getClientId() != 0) {
+            this.customerApiService.validateClientId(dto.getClientId(), authorization);
+        }
+
+        ProjectEntity updatedProject = this.mapper.mapUpdateDtoToEntity(dto);
+        updatedProject = this.projectService.update(updatedProject);
         return this.mapper.mapEntityToGetDto(updatedProject);
     }
 }

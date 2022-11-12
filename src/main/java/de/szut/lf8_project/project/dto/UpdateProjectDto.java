@@ -13,7 +13,6 @@ public class UpdateProjectDto {
     @NotNull(message = "Project ID is mandatory")
     private long id;
 
-    private long responsibleEmployeeId;
     private long clientId;
     private String clientContactPersonInfo;
 
