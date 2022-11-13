@@ -64,5 +64,9 @@ public class ProjectService {
     public List<ProjectEntity> readAll() {
         return this.repo.findAll();
     }
+
+    public void deleteById(long id) {
+        this.repo.deleteById(id);
+    }
 }
 
