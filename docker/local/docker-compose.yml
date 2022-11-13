@@ -1,18 +1,18 @@
 version: '3'
 
 volumes:
-  lf8_starter_postgres_data:
+  mnf_postgres_data:
     driver: local
 
 services:
   postgres_for_lf8_starter:
-    container_name: lf8_starter_postgres_container
+    container_name: mnf_postgres_db
     image: postgres:13.3
     volumes:
-      - lf8_starter_postgres_data:/var/lib/postgresql/data
+      - mnf_postgres_data:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: lf8_starter_db
-      POSTGRES_USER: lf8_starter
+      POSTGRES_DB: mnf_db
+      POSTGRES_USER: mnf
       POSTGRES_PASSWORD: secret
     ports:
       - "5436:5432"
