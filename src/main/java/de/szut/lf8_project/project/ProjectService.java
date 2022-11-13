@@ -44,6 +44,18 @@ public class ProjectService {
         return this.entityLinkRepo.saveAndFlush(employeeProjectEntity);
     }
 
+    public void removeEmployeeFromProject(ProjectEntity project, EmployeeEntity employee) throws ResourceNotFoundException {
+        var key = new EmployeeProjectKey(employee.getId(), project.getId());
+        var link = this.entityLinkRepo.findById(key);
+
+        if (link.isEmpty()) {
+            throw new ResourceNotFoundException("Employee with id " + employee.getId() +
+                    " is not a member of the project with id " + project.getId());
+        }
+
+        this.entityLinkRepo.delete(link.get());
+    }
+
     public ProjectEntity readById(long id) {
         return this.repo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Failed to resolve project with id " + id));
