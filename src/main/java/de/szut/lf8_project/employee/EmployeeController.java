@@ -22,10 +22,10 @@ public class EmployeeController {
 
     @Operation(summary = "find all projects of employee by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "list of employees",
+            @ApiResponse(responseCode = "200", description = "employee id and project list",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = GetEmployeeDto.class))}),
-            @ApiResponse(responseCode = "404", description = "user with this id was not found", content = @Content),
+            @ApiResponse(responseCode = "404", description = "no data found for employee", content = @Content),
             @ApiResponse(responseCode = "401", description = "not authorized", content = @Content)})
     @GetMapping("/{id}/projects")
     public GetEmployeeProjectsDto getAllProjectsOfEmployeeById(@PathVariable long id) {
