@@ -1,6 +1,5 @@
 package de.szut.lf8_project.project.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import de.szut.lf8_project.employee.dto.GetEmployeeDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

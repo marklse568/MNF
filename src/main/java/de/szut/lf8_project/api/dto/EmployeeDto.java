@@ -2,7 +2,6 @@ package de.szut.lf8_project.api.dto;
 
 import lombok.Data;
 
-import java.util.Arrays;
 import java.util.Set;
 
 @Data

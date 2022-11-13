@@ -5,11 +5,9 @@ import de.szut.lf8_project.employee.employee_project.EmployeeProjectEntity;
 import de.szut.lf8_project.integrationtests.BaseIntegrationTest;
 import de.szut.lf8_project.project.ProjectEntity;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.MediaType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 public class RemoveMemberFromProjectTest extends BaseIntegrationTest {
     @Test
