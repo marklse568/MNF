@@ -1,0 +1,35 @@
+_id: req_6ec3a01a17794288b4bf73bee80d8f45
+type: Request
+parentId: wrk_539b19b3b4c449d6b90a6655fd28a761
+modified: 1668349617579
+created: 1667576655567
+url: http://localhost:8089/project
+name: create project
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"responsibleEmployeeId": 69,
+    	"clientId": 420,
+    	"clientContactInformation": "huhu",
+    	"name": "brtttwt",
+    	"startDate": "2025-11-11"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication:
+  type: bearer
+  token: eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzUFQ0dldiNno5MnlQWk1EWnBqT1U0RjFVN0lwNi1ELUlqQWVGczJPbGU0In0.eyJleHAiOjE2NjgzNTAyNjIsImlhdCI6MTY2ODM0NjY2MiwianRpIjoiNWJhZjg1MzAtZmIyOC00NzFmLWFmNzItNjYxZGU3ZGVjMTE1IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay5zenV0LmRldi9hdXRoL3JlYWxtcy9zenV0IiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjU1NDZjZDIxLTk4NTQtNDMyZi1hNDY3LTRkZTNlZWRmNTg4OSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImVtcGxveWVlLW1hbmFnZW1lbnQtc2VydmljZSIsInNlc3Npb25fc3RhdGUiOiI5ZjdiNmZkYi1mZmYxLTRlYmEtYTRjZC1mYzk1ZTM5ZjYxOTIiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1zenV0IiwidW1hX2F1dGhvcml6YXRpb24iLCJ1c2VyIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyIn0.TSIFw8riUPOTApfnq3VMO6-Hj3LB2pBuWsGTj6ekGgvimdO_Ezc8624BYXKWTHE5tDd7zdztHllrxEaZ_YeBMI7HTsTKtUPIj5labOcn0LIZF8Fm9K_jrrTew1QTCtMD-UmbNm8ZMD8VAAhUbAQNq98g0S7vK8ZVynS-DDdxS-_wbbnzzwIE7h9k6adodUhe87WAYu1SCktFwsIqA08G91sr9BexC_EvmA3mB-irFMu_8ZI6StYPNUTFHm4Kq2MVBgLULLShNlkCIMbMJxPX0io1zXciwIqzYZ-jLACYm3hGEXsgViR4MA2UfmA9vWz2LF1CxFZ7kDQ1n7cLBcwdgQ
+  disabled: true
+metaSortKey: -1667781779466
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

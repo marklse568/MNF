@@ -1,0 +1,21 @@
+_id: req_0f12d5c0b3b04773aee5c077624887a1
+type: Request
+parentId: wrk_539b19b3b4c449d6b90a6655fd28a761
+modified: 1668349767705
+created: 1668349676796
+url: http://localhost:8089/project/2/employees/654
+name: remove employee from project
+description: ""
+method: DELETE
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1668349676796
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
