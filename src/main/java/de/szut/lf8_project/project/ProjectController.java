@@ -110,7 +110,7 @@ public class ProjectController {
 
     @Operation(summary = "remove employee from project")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "employee added to project",
+            @ApiResponse(responseCode = "204", description = "removed employee from project",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = GetProjectDto.class))}),
             @ApiResponse(responseCode = "404", description = "project with this id was not found", content = @Content),

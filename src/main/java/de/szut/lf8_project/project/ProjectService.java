@@ -56,8 +56,6 @@ public class ProjectService {
         this.entityLinkRepo.delete(link.get());
     }
 
-
-
     public ProjectEntity readById(long id) {
         return this.repo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Failed to resolve project with id " + id));
