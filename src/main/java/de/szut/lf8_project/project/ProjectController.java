@@ -130,4 +130,16 @@ public class ProjectController {
         updatedProject = this.projectService.update(updatedProject);
         return this.mapper.mapEntityToGetDto(updatedProject);
     }
+
+    @Operation(summary = "deletes a project")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "project deleted",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = GetProjectDto.class))}),
+            @ApiResponse(responseCode = "404", description = "project with this id was not found", content = @Content), @ApiResponse(responseCode = "401", description = "not authorized", content = @Content)})
+    @DeleteMapping("/{id}")
+    public void deleteProject(@PathVariable long id) {
+        ProjectEntity project = projectService.readById(id);
+        this.projectService.deleteById(project.getId());
+    }
 }
