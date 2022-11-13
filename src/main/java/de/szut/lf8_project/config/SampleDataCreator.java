@@ -10,6 +10,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 public class SampleDataCreator implements ApplicationRunner {
 
@@ -42,6 +44,10 @@ public class SampleDataCreator implements ApplicationRunner {
         projectOne.setClientId(456);
         projectOne.setClientContactPersonInfo("jane@doe.fishing");
         projectOne.setComment("to the moon");
+        projectOne.setPlannedEndDate(LocalDate.now().plusYears(3));
+        projectOne.setStartDate(LocalDate.now().minusMonths(11));
+        projectOne.setEndDate(LocalDate.now().plusYears(4));
+
 
         var projectTwo = new ProjectEntity();
         projectTwo.setName("Project Whale");
@@ -49,6 +55,9 @@ public class SampleDataCreator implements ApplicationRunner {
         projectTwo.setClientId(222);
         projectTwo.setClientContactPersonInfo("john@doe.fishing");
         projectTwo.setComment("to the stars");
+        projectTwo.setPlannedEndDate(LocalDate.now().plusYears(2));
+        projectTwo.setStartDate(LocalDate.now().minusMonths(5));
+        projectTwo.setEndDate(LocalDate.now().plusYears(3));
 
         var projectThree = new ProjectEntity();
         projectThree.setName("Project Dolphin");
@@ -56,6 +65,9 @@ public class SampleDataCreator implements ApplicationRunner {
         projectThree.setClientId(555);
         projectThree.setClientContactPersonInfo("juergen_der_zerstoerer@web.de");
         projectThree.setComment("to the sun");
+        projectThree.setPlannedEndDate(LocalDate.now().plusYears(1));
+        projectThree.setStartDate(LocalDate.now().minusMonths(2));
+        projectThree.setEndDate(LocalDate.now().plusYears(2));
 
 
         var qualificationsOne = new EmployeeProjectEntity();

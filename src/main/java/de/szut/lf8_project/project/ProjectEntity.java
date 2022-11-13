@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,9 +27,9 @@ public class ProjectEntity {
     private String clientContactPersonInfo;
     private String name;
     private String comment;
-    private Date plannedEndDate;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate plannedEndDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     @ManyToOne
     private EmployeeEntity responsibleEmployee;
