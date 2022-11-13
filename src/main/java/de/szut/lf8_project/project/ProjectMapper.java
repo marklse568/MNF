@@ -61,7 +61,6 @@ public class ProjectMapper {
         entity.setComment(dto.getComment());
         entity.setStartDate(dto.getStartDate());
         entity.setPlannedEndDate(dto.getPlannedEndDate());
-        entity.setEndDate(dto.getEndDate());
         return entity;
     }
 
