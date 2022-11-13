@@ -46,7 +46,7 @@ public class GetAllProjectsOfEmployeeTest extends BaseIntegrationTest {
         link.setQualification("Sudoku");
         this.employeeProjectRepository.saveAndFlush(link);
 
-        this.mockMvc.perform(get("/employee/" + employee.getId() + "/projects")
+        this.mockMvc.perform(get("/employee/{id}/projects",employee.getId())
                         .header("Authorization", generateJwt()))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.id", is((int) employee.getId())))
