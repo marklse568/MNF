@@ -1,0 +1,24 @@
+_id: req_d5bebd50281442d7983e12c0b222c670
+type: Request
+parentId: wrk_539b19b3b4c449d6b90a6655fd28a761
+modified: 1668349624663
+created: 1667582250497
+url: http://localhost:8089/project/2
+name: get project by id
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: bearer
+  token: eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzUFQ0dldiNno5MnlQWk1EWnBqT1U0RjFVN0lwNi1ELUlqQWVGczJPbGU0In0
+  disabled: true
+metaSortKey: -1667679265855
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
