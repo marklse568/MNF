@@ -1,6 +1,7 @@
 package de.szut.lf8_project.testcontainers;
 
 import de.szut.lf8_project.employee.EmployeeRepository;
+import de.szut.lf8_project.employee.employee_project.EmployeeProjectRepository;
 import de.szut.lf8_project.project.ProjectRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class AbstractIntegrationTest {
 
     @Autowired
     protected EmployeeRepository employeeRepository;
+
+    @Autowired
+    protected EmployeeProjectRepository employeeProjectRepository;
 
     @BeforeEach
     void setUp() {

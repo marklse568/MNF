@@ -3,7 +3,6 @@ package de.szut.lf8_project.project;
 import de.szut.lf8_project.employee.EmployeeService;
 import de.szut.lf8_project.employee.dto.GetEmployeeDto;
 import de.szut.lf8_project.employee.employee_project.EmployeeProjectEntity;
-import de.szut.lf8_project.exceptionHandling.ResourceNotFoundException;
 import de.szut.lf8_project.project.dto.CreateProjectDto;
 import de.szut.lf8_project.project.dto.GetProjectDto;
 import de.szut.lf8_project.project.dto.GetProjectEmployeesDto;
@@ -36,11 +35,11 @@ public class ProjectMapper {
                 entity.getPlannedEndDate(),
                 entity.getStartDate(),
                 entity.getEndDate(),
-                employeeProjectEntities.stream().map(this::mapQualificationEntityToGetDto).collect(Collectors.toSet())
+                employeeProjectEntities.stream().map(this::mapGetEmployeeDto).collect(Collectors.toSet())
         );
     }
 
-    public GetEmployeeDto mapQualificationEntityToGetDto(EmployeeProjectEntity entity) {
+    public GetEmployeeDto mapGetEmployeeDto(EmployeeProjectEntity entity) {
         return new GetEmployeeDto(
                 entity.getQualification(),
                 entity.getEmployee().getId()
@@ -70,7 +69,7 @@ public class ProjectMapper {
         if (dto.getClientId() != 0) {
             entity.setClientId(dto.getClientId());
         }
-        if (!dto.getClientContactPersonInfo().isEmpty()) {
+        if (dto.getClientContactPersonInfo() != null) {
             entity.setClientContactPersonInfo(dto.getClientContactPersonInfo());
         }
         if (dto.getName() != null) {
