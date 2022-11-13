@@ -4,7 +4,7 @@ import de.szut.lf8_project.api.CustomerApiService;
 import de.szut.lf8_project.api.EmployeeApiService;
 import de.szut.lf8_project.employee.EmployeeEntity;
 import de.szut.lf8_project.employee.EmployeeService;
-import de.szut.lf8_project.employee.dto.GetEmployeeDto;
+import de.szut.lf8_project.employee.employee_project.EmployeeProjectEntity;
 import de.szut.lf8_project.project.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -41,7 +41,7 @@ public class ProjectController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "created project",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = GetProjectDto.class))}),
+                        schema = @Schema(implementation = GetProjectDto.class))}),
             @ApiResponse(responseCode = "400", description = "invalid JSON posted",
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "not authorized",
@@ -83,7 +83,7 @@ public class ProjectController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "list of projects",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = GetProjectDto.class))}),
+                            schema = @Schema(implementation = GetProjectDto[].class))}),
             @ApiResponse(responseCode = "401", description = "not authorized",
                     content = @Content)})
     @GetMapping
@@ -107,10 +107,9 @@ public class ProjectController {
 
     @Operation(summary = "deletes a project")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "project deleted",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = GetProjectDto.class))}),
-            @ApiResponse(responseCode = "404", description = "project with this id was not found", content = @Content), @ApiResponse(responseCode = "401", description = "not authorized", content = @Content)})
+            @ApiResponse(responseCode = "204", description = "project deleted"),
+            @ApiResponse(responseCode = "404", description = "project with this id was not found"),
+            @ApiResponse(responseCode = "401", description = "not authorized")})
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProject(@PathVariable long id) {
         ProjectEntity project = projectService.readById(id);
@@ -118,13 +117,13 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @Operation(summary = "find all employees by project id")
+    @Operation(summary = "find a list of employees by project id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "list of employees",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = GetEmployeeDto.class))}),
-            @ApiResponse(responseCode = "404", description = "project with this id was not found", content = @Content),
-            @ApiResponse(responseCode = "401", description = "not authorized", content = @Content)})
+                            schema = @Schema(implementation = GetProjectEmployeesDto.class))}),
+            @ApiResponse(responseCode = "404", description = "project with this id was not found"),
+            @ApiResponse(responseCode = "401", description = "not authorized")})
     @GetMapping("/{id}/employees")
     public GetProjectEmployeesDto getAllEmployeesOfProjectByProjectId(@PathVariable long id) {
         return this.mapper.mapEntityToGetProjectEmployeesDto(projectService.readById(id));
@@ -134,9 +133,10 @@ public class ProjectController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "employee added to project",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = GetProjectDto.class))}),
-            @ApiResponse(responseCode = "404", description = "project with this id was not found", content = @Content),
-            @ApiResponse(responseCode = "401", description = "not authorized", content = @Content)})
+                            schema = @Schema(implementation = GetProjectEmployeesDto.class))}),
+            @ApiResponse(responseCode = "400", description = "invalid JSON posted"),
+            @ApiResponse(responseCode = "404", description = "project with this id was not found"),
+            @ApiResponse(responseCode = "401", description = "not authorized")})
     @PutMapping("/{id}/employees/{employeeId}")
     public GetProjectEmployeesDto addEmployeeToProject(@PathVariable long id, @PathVariable long employeeId,
                                                        @RequestBody @Valid AddUserToProjectDto dto,
@@ -144,20 +144,18 @@ public class ProjectController {
         this.employeeApiService.validateEmployeeIdAndQualification(employeeId, dto.getQualification(), authorization);
         ProjectEntity project = projectService.readById(id);
         EmployeeEntity employee = employeeService.readOrCreateById(employeeId);
-        var employeeProjectEntity = this.projectService.addEmployeeToProject(project, employee, dto.getQualification());
+        EmployeeProjectEntity employeeProjectEntity = this.projectService.addEmployeeToProject(project, employee, dto.getQualification());
         return this.mapper.mapEntityToGetProjectEmployeesDto(employeeProjectEntity.getProject());
     }
 
     @Operation(summary = "remove employee from project")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "removed employee from project",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = GetProjectDto.class))}),
-            @ApiResponse(responseCode = "404", description = "project with this id was not found", content = @Content),
-            @ApiResponse(responseCode = "401", description = "not authorized", content = @Content)})
+            @ApiResponse(responseCode = "204", description = "removed employee from project"),
+            @ApiResponse(responseCode = "404", description = "project with this id was not found"),
+            @ApiResponse(responseCode = "401", description = "not authorized")})
     @DeleteMapping("/{id}/employees/{employeeId}")
     public ResponseEntity<Void> removeEmployeeFromProject(@PathVariable long id, @PathVariable long employeeId,
-                                                            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
+                                                          @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
         this.employeeApiService.validateEmployeeId(employeeId, authorization);
         ProjectEntity project = projectService.readById(id);
         EmployeeEntity employee = employeeService.readById(employeeId);

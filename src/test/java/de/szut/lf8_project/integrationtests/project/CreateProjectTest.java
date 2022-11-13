@@ -2,17 +2,11 @@ package de.szut.lf8_project.integrationtests.project;
 
 import de.szut.lf8_project.employee.EmployeeEntity;
 import de.szut.lf8_project.integrationtests.BaseIntegrationTest;
-import de.szut.lf8_project.project.ProjectEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
-import java.util.GregorianCalendar;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class CreateProjectTest extends BaseIntegrationTest {
     @Test

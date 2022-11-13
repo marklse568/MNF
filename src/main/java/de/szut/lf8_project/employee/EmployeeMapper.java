@@ -1,14 +1,10 @@
 package de.szut.lf8_project.employee;
 
-import de.szut.lf8_project.employee.dto.GetEmployeeDto;
 import de.szut.lf8_project.employee.dto.GetEmployeeProjectsDto;
 import de.szut.lf8_project.employee.employee_project.EmployeeProjectEntity;
-import de.szut.lf8_project.project.ProjectEntity;
-import de.szut.lf8_project.project.ProjectService;
-import de.szut.lf8_project.project.dto.*;
+import de.szut.lf8_project.project.dto.GetProjectForEmployeeDto;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service

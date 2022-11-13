@@ -3,12 +3,14 @@ package de.szut.lf8_project.integrationtests;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.szut.lf8_project.testcontainers.AbstractIntegrationTest;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.*;
+import java.util.Map;
 
 public class BaseIntegrationTest extends AbstractIntegrationTest {
 

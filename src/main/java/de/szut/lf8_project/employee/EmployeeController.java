@@ -1,13 +1,15 @@
 package de.szut.lf8_project.employee;
 
-import de.szut.lf8_project.employee.dto.GetEmployeeDto;
 import de.szut.lf8_project.employee.dto.GetEmployeeProjectsDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "employee")
@@ -24,7 +26,7 @@ public class EmployeeController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "employee id and project list",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = GetEmployeeDto.class))}),
+                            schema = @Schema(implementation = GetEmployeeProjectsDto.class))}),
             @ApiResponse(responseCode = "404", description = "no data found for employee", content = @Content),
             @ApiResponse(responseCode = "401", description = "not authorized", content = @Content)})
     @GetMapping("/{id}/projects")
