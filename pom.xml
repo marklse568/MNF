@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>de.szut</groupId>
-    <artifactId>lf8_project_starter</artifactId>
+    <artifactId>mnf</artifactId>
     <version>0.0.2-SNAPSHOT</version>
     <name>ProjectService API</name>
     <description>ProjectService API which interacts with the "Employees Management Micro-Service" to track project resources</description>
