@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -22,7 +22,7 @@ public class UpdateProjectDto {
     @Size(max = 255, message = "Comment must be less than 255 characters")
     private String comment;
 
-    private Date plannedEndDate;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate plannedEndDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 }
