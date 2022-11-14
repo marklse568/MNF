@@ -3,14 +3,12 @@ package de.szut.lf8_project.project;
 import de.szut.lf8_project.employee.EmployeeService;
 import de.szut.lf8_project.employee.dto.GetEmployeeDto;
 import de.szut.lf8_project.employee_project.EmployeeProjectEntity;
-import de.szut.lf8_project.exceptionHandling.UnprocessableEntityException;
 import de.szut.lf8_project.project.dto.CreateProjectDto;
 import de.szut.lf8_project.project.dto.GetProjectDto;
 import de.szut.lf8_project.project.dto.GetProjectEmployeesDto;
 import de.szut.lf8_project.project.dto.UpdateProjectDto;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,7 +51,7 @@ public class ProjectMapper {
     }
 
     public ProjectEntity mapCreateDtoToEntity(CreateProjectDto dto) {
-        this.validateStartDateBeforeEndDate(dto.getStartDate(), dto.getPlannedEndDate());
+        this.service.validateStartDateBeforeEndDate(dto.getStartDate(), dto.getPlannedEndDate());
 
         ProjectEntity entity = new ProjectEntity();
         entity.setResponsibleEmployee(this.employeeService.readOrCreateById(dto.getResponsibleEmployeeId()));
@@ -68,10 +66,23 @@ public class ProjectMapper {
     }
 
     public ProjectEntity mapUpdateDtoToEntity(UpdateProjectDto dto) {
-        this.validateStartDateBeforeEndDate(dto.getStartDate(), dto.getPlannedEndDate());
-        this.validateStartDateBeforeEndDate(dto.getStartDate(), dto.getEndDate());
-
         ProjectEntity entity = service.readById(dto.getId());
+
+        this.service.validateStartDateBeforeEndDate(dto.getStartDate(), dto.getPlannedEndDate());
+        this.service.validateStartDateBeforeEndDate(dto.getStartDate(), dto.getEndDate());
+
+        if (dto.getStartDate() == null) {
+            this.service.validateStartDateBeforeEndDate(entity.getStartDate(), dto.getPlannedEndDate());
+            this.service.validateStartDateBeforeEndDate(entity.getStartDate(), dto.getEndDate());
+        }
+        if (dto.getPlannedEndDate() == null) {
+            this.service.validateStartDateBeforeEndDate(dto.getStartDate(), entity.getPlannedEndDate());
+            this.service.validateStartDateBeforeEndDate(dto.getStartDate(), entity.getEndDate());
+        }
+        if (dto.getEndDate() == null) {
+            this.service.validateStartDateBeforeEndDate(entity.getStartDate(), dto.getPlannedEndDate());
+            this.service.validateStartDateBeforeEndDate(entity.getStartDate(), entity.getEndDate());
+        }
 
         if (dto.getClientId() != 0) {
             entity.setClientId(dto.getClientId());
@@ -112,9 +123,10 @@ public class ProjectMapper {
         );
     }
 
-    private void validateStartDateBeforeEndDate(LocalDate startDate, LocalDate endDate) throws UnprocessableEntityException {
-        if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
-            throw new UnprocessableEntityException("Start date must be before end date");
-        }
+    public GetEmployeeDto mapEmployeeProjectEntityToGetEmployeeDto(EmployeeProjectEntity entity) {
+        return new GetEmployeeDto(
+                entity.getQualification(),
+                entity.getEmployee().getId()
+        );
     }
 }

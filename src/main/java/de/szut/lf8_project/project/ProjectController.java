@@ -4,7 +4,10 @@ import de.szut.lf8_project.api.CustomerApiService;
 import de.szut.lf8_project.api.EmployeeApiService;
 import de.szut.lf8_project.employee.EmployeeEntity;
 import de.szut.lf8_project.employee.EmployeeService;
+import de.szut.lf8_project.employee.dto.GetEmployeeDto;
 import de.szut.lf8_project.employee_project.EmployeeProjectEntity;
+import de.szut.lf8_project.employee_project.EmployeeProjectService;
+import de.szut.lf8_project.employee_project.dto.QualificationDto;
 import de.szut.lf8_project.project.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "project")
@@ -27,14 +31,16 @@ public class ProjectController {
     private final ProjectMapper mapper;
     private final EmployeeApiService employeeApiService;
     private final CustomerApiService customerApiService;
+    private final EmployeeProjectService employeeProjectService;
 
     public ProjectController(ProjectService projectService, EmployeeService employeeService, ProjectMapper mapper,
-                             EmployeeApiService employeeApiService, CustomerApiService customerApiService) {
+                             EmployeeApiService employeeApiService, CustomerApiService customerApiService, EmployeeProjectService employeeProjectService) {
         this.projectService = projectService;
         this.employeeService = employeeService;
         this.mapper = mapper;
         this.employeeApiService = employeeApiService;
         this.customerApiService = customerApiService;
+        this.employeeProjectService = employeeProjectService;
     }
 
     @Operation(summary = "creates a new project")
@@ -127,6 +133,26 @@ public class ProjectController {
     @GetMapping("/{id}/employees")
     public GetProjectEmployeesDto getAllEmployeesOfProjectByProjectId(@PathVariable long id) {
         return this.mapper.mapEntityToGetProjectEmployeesDto(projectService.readById(id));
+    }
+
+    @Operation(summary = "find a suitable employee for a project based on qualification and time slot")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "list of suitable employees",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = GetProjectEmployeesDto.class))}),
+            @ApiResponse(responseCode = "404", description = "project with this id was not found"),
+            @ApiResponse(responseCode = "401", description = "not authorized")})
+    @GetMapping("/{id}/employees/suitable")
+    public List<GetEmployeeDto> getSuitableEmployeesForProjectByProjectIdAndQualification(@PathVariable long id,
+                                                                                          @RequestBody @Valid QualificationDto dto) {
+        var project = projectService.readById(id);
+        var startDate = project.getStartDate();
+        var endDateOrPlannedEndDate = project.getEndDate() != null ? project.getEndDate() : project.getPlannedEndDate();
+
+        var suitableEmployees = this.employeeProjectService.findAllByQualificationAndTimespan(dto.getQualification(),
+                startDate, endDateOrPlannedEndDate);
+        
+        return suitableEmployees.stream().map(this.mapper::mapEmployeeProjectEntityToGetEmployeeDto).collect(Collectors.toList());
     }
 
     @Operation(summary = "add employee to project")
