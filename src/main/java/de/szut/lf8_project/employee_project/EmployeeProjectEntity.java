@@ -1,4 +1,4 @@
-package de.szut.lf8_project.employee.employee_project;
+package de.szut.lf8_project.employee_project;
 
 import de.szut.lf8_project.employee.EmployeeEntity;
 import de.szut.lf8_project.project.ProjectEntity;

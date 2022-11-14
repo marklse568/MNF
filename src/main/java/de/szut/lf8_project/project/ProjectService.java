@@ -1,9 +1,9 @@
 package de.szut.lf8_project.project;
 
 import de.szut.lf8_project.employee.EmployeeEntity;
-import de.szut.lf8_project.employee.employee_project.EmployeeProjectEntity;
-import de.szut.lf8_project.employee.employee_project.EmployeeProjectKey;
-import de.szut.lf8_project.employee.employee_project.EmployeeProjectRepository;
+import de.szut.lf8_project.employee_project.EmployeeProjectEntity;
+import de.szut.lf8_project.employee_project.EmployeeProjectKey;
+import de.szut.lf8_project.employee_project.EmployeeProjectRepository;
 import de.szut.lf8_project.exceptionHandling.ConflictException;
 import de.szut.lf8_project.exceptionHandling.ResourceNotFoundException;
 import org.springframework.stereotype.Service;

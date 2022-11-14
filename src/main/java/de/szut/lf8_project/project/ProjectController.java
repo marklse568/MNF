@@ -4,7 +4,7 @@ import de.szut.lf8_project.api.CustomerApiService;
 import de.szut.lf8_project.api.EmployeeApiService;
 import de.szut.lf8_project.employee.EmployeeEntity;
 import de.szut.lf8_project.employee.EmployeeService;
-import de.szut.lf8_project.employee.employee_project.EmployeeProjectEntity;
+import de.szut.lf8_project.employee_project.EmployeeProjectEntity;
 import de.szut.lf8_project.project.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -41,7 +41,7 @@ public class ProjectController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "created project",
                     content = {@Content(mediaType = "application/json",
-                        schema = @Schema(implementation = GetProjectDto.class))}),
+                            schema = @Schema(implementation = GetProjectDto.class))}),
             @ApiResponse(responseCode = "400", description = "invalid JSON posted",
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "not authorized",
