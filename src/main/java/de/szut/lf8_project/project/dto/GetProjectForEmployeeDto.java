@@ -15,4 +15,5 @@ public class GetProjectForEmployeeDto {
     private LocalDate plannedEndDate;
     private LocalDate startDate;
     private LocalDate endDate;
+    private String thisEmployeesQualificationInProject;
 }
