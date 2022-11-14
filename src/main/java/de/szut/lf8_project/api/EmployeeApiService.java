@@ -39,7 +39,7 @@ public class EmployeeApiService {
 
         ResponseEntity<EmployeeDto> response = null;
         try {
-            response = this.restTemplate.exchange(this.url + "/{id}", HttpMethod.GET, entity, EmployeeDto.class, (int)id);
+            response = this.restTemplate.exchange(this.url + "/{id}", HttpMethod.GET, entity, EmployeeDto.class, (int) id);
         } catch (HttpClientErrorException clientException) {
             if (clientException.getStatusCode() == HttpStatus.NOT_FOUND) {
                 throw new ResourceNotFoundException("Failed to resolve employee with id " + id);
