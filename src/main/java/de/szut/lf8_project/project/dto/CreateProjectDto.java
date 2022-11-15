@@ -25,6 +25,9 @@ public class CreateProjectDto {
     @Size(max = 255, message = "Comment must be less than 255 characters")
     private String comment;
 
-    private LocalDate plannedEndDate;
+    @NotNull(message = "Start date is mandatory")
     private LocalDate startDate;
+
+    @NotNull(message = "Planned end date is mandatory")
+    private LocalDate plannedEndDate;
 }

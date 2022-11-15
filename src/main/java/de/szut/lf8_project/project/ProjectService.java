@@ -6,8 +6,10 @@ import de.szut.lf8_project.employee_project.EmployeeProjectKey;
 import de.szut.lf8_project.employee_project.EmployeeProjectRepository;
 import de.szut.lf8_project.exceptionHandling.ConflictException;
 import de.szut.lf8_project.exceptionHandling.ResourceNotFoundException;
+import de.szut.lf8_project.exceptionHandling.UnprocessableEntityException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -68,5 +70,12 @@ public class ProjectService {
     public void deleteById(long id) {
         this.repo.deleteById(id);
     }
+
+    public void validateStartDateBeforeEndDate(LocalDate startDate, LocalDate endDate) throws UnprocessableEntityException {
+        if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
+            throw new UnprocessableEntityException("Start date must be before end date");
+        }
+    }
+
 }
 

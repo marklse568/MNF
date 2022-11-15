@@ -69,6 +69,14 @@ public class SampleDataCreator implements ApplicationRunner {
         projectThree.setStartDate(LocalDate.now().minusMonths(2));
         projectThree.setEndDate(LocalDate.now().plusYears(2));
 
+        var projectFour = new ProjectEntity();
+        projectFour.setName("Project Shark");
+        projectFour.setResponsibleEmployee(employeeOne);
+        projectFour.setClientId(111);
+        projectFour.setClientContactPersonInfo("ben_dover@mike_litoris.com");
+        projectFour.setComment("to the galaxy");
+        projectFour.setPlannedEndDate(LocalDate.now().plusYears(14));
+        projectFour.setStartDate(LocalDate.now().plusYears(12));
 
         var qualificationsOne = new EmployeeProjectEntity();
         qualificationsOne.setEmployee(employeeOne);
@@ -94,6 +102,7 @@ public class SampleDataCreator implements ApplicationRunner {
         this.projectRepo.save(projectOne);
         this.projectRepo.save(projectTwo);
         this.projectRepo.save(projectThree);
+        this.projectRepo.save(projectFour);
 
         this.employeeProjectRepo.save(qualificationsOne);
         this.employeeProjectRepo.save(qualificationsTwo);
