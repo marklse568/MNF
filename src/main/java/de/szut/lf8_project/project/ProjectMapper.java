@@ -2,7 +2,7 @@ package de.szut.lf8_project.project;
 
 import de.szut.lf8_project.employee.EmployeeService;
 import de.szut.lf8_project.employee.dto.GetEmployeeDto;
-import de.szut.lf8_project.employee.employee_project.EmployeeProjectEntity;
+import de.szut.lf8_project.employee_project.EmployeeProjectEntity;
 import de.szut.lf8_project.exceptionHandling.UnprocessableEntityException;
 import de.szut.lf8_project.project.dto.CreateProjectDto;
 import de.szut.lf8_project.project.dto.GetProjectDto;

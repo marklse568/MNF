@@ -1,4 +1,4 @@
-package de.szut.lf8_project.employee.employee_project;
+package de.szut.lf8_project.employee_project;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

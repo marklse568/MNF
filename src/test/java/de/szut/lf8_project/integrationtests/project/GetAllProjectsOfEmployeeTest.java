@@ -1,7 +1,7 @@
 package de.szut.lf8_project.integrationtests.project;
 
 import de.szut.lf8_project.employee.EmployeeEntity;
-import de.szut.lf8_project.employee.employee_project.EmployeeProjectEntity;
+import de.szut.lf8_project.employee_project.EmployeeProjectEntity;
 import de.szut.lf8_project.integrationtests.BaseIntegrationTest;
 import de.szut.lf8_project.project.ProjectEntity;
 import org.junit.jupiter.api.Test;
@@ -46,7 +46,7 @@ public class GetAllProjectsOfEmployeeTest extends BaseIntegrationTest {
         link.setQualification("Sudoku");
         this.employeeProjectRepository.saveAndFlush(link);
 
-        this.mockMvc.perform(get("/employee/{id}/projects",employee.getId())
+        this.mockMvc.perform(get("/employee/{id}/projects", employee.getId())
                         .header("Authorization", generateJwt()))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.id", is((int) employee.getId())))

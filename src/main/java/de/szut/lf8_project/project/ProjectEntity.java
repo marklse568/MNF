@@ -1,7 +1,7 @@
 package de.szut.lf8_project.project;
 
 import de.szut.lf8_project.employee.EmployeeEntity;
-import de.szut.lf8_project.employee.employee_project.EmployeeProjectEntity;
+import de.szut.lf8_project.employee_project.EmployeeProjectEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
