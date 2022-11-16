@@ -19,13 +19,13 @@ public class EmployeeProjectService {
         return this.repository.findAll();
     }
 
-    public List<EmployeeProjectEntity> findAllByQualification(String qualification) {
+    private List<EmployeeProjectEntity> findAllByQualification(String qualification) {
         var employees = this.readAll();
         employees.removeIf(e -> !e.getQualification().equals(qualification));
         return employees;
     }
 
-    public boolean isNotAvailable(EmployeeProjectEntity entity, LocalDate startDate, LocalDate endDate) {
+    private boolean isNotAvailable(EmployeeProjectEntity entity, LocalDate startDate, LocalDate endDate) {
         LocalDate endOrPlannedEndDate = entity.getProject().getEndDate() == null ?
                 entity.getProject().getPlannedEndDate() :
                 entity.getProject().getEndDate();
