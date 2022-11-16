@@ -31,9 +31,16 @@ public class OpenAPIConfiguration {
         return new OpenAPI()
                 .addServersItem(new Server().url(this.context.getContextPath()))
                 .info(new Info()
-                        .title("LF8 project starter")
-                        .description("\n## Auth\n" +
-                                "\n## Authentication\n" + "\nThis Hello service uses JWTs to authenticate requests. You will receive a bearer token by making a POST-Request in IntelliJ on:\n\n" +
+                        .title("MNF Project Management Micro-Service")
+                        .description("\n## Overview\n" +
+                                "\nThe MNF Project Management API manages the projects of HighTec Gmbh." +
+                                "It offers the possibility to create, read, update and " +
+                                "delete projects. Existing projects can be assigned new " +
+                                "employees or have them removed. The API is organized around REST. It has " +
+                                "predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, uses standard HTTP response codes and authentication.\n" +
+                                "\n## Authentication\n" + "\nThis Project Management Service API uses JWTs to " +
+                                "authenticate requests. " +
+                                "You will receive a bearer token by making a POST-Request in IntelliJ on:\n\n" +
                                 "\n" +
                                 "```\nPOST http://keycloak.szut.dev/auth/realms/szut/protocol/openid-connect/token\nContent-Type: application/x-www-form-urlencoded\ngrant_type=password&client_id=employee-management-service&username=user&password=test\n```\n" +
                                 "\n" +
